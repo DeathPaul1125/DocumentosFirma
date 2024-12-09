@@ -72,15 +72,18 @@ class DfDocumento extends ModelClass
     public function getLote()
     {
         $lote = new Lote();
-        $lote->loadFromCode('', [new DataBaseWhere('codlote', 'HS22020')]);
+        $lote->loadFromCode('', [new DataBaseWhere('codlote', $this->codlote)]);
         return $lote;
     }
+  
     public function getColonia()
     {
         $colonia = new Colonia();
         $colonia->loadFromCode($this->getLote()->colonia);
         return $colonia;
     }
+
+    
 
     // Nostraemos la Factura relacionada
     public function getFactura()
@@ -157,6 +160,8 @@ class DfDocumento extends ModelClass
         $contacto = new Contacto();
         if (false == $contacto->loadFromCode($cliente->codcliente)){    
         }        
+
+       
         $proveedor = $this->getProveedor();
         $direccionProveedor = $proveedor->getDefaultAddress();
         $factura = $this->getFactura();
@@ -165,7 +170,6 @@ class DfDocumento extends ModelClass
         $pedido = $this->getPedido();
         $lote = $this->getLote();
         $colonia = $this->getColonia();
-
 
         // Reemplazamos las variables de la plantilla
         $sustituciones = [
@@ -206,6 +210,7 @@ class DfDocumento extends ModelClass
             '{contacto-telefono}' => $contacto->telefono1,
             '{contacto-departamento}' => $contacto->provincia,
 
+
             '{finca}' => $lote->finca,
             '{sector}' => $lote->sector,
             '{manzana}' => $lote->manzana,
@@ -219,8 +224,17 @@ class DfDocumento extends ModelClass
             '{total-metros}' => $lote->totalmetros,
 
 
+
             //colonia
             '{colonia}' => $colonia->nombre,
+            '{representante}' => $colonia->representante,
+            '{representante-edad-letras}' => $colonia->edadletras,
+            '{representante-edad-letras}' => $colonia->edadletras,
+            '{representante-profesion}' => $colonia->profesion,
+            '{representante-estado-civil}' => $colonia->estadocivil,
+            '{representante-cui}' => $colonia->cuirepresentante,
+            '{representante-cui-letras}' => $colonia->cuiletras,
+
         ];
         $html = str_replace(array_keys($sustituciones), array_values($sustituciones), $html);
 
