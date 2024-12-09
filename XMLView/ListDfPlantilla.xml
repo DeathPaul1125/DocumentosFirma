@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+    <columns>
+        <column name="creationdate" title="Creada" order="100">
+            <widget type="date" fieldname="creationdate" />
+        </column>
+        <column name="titulo" title="Titulo del Documento" order="110">
+            <widget type="text" fieldname="titulo" />
+        </column>
+        <column name="html" display="none" order="200">
+            <widget type="textarea" fieldname="html" />
+        </column>
+        <column name="idattachedfile" title="Firma Empresa" order="120">
+            <widget type="text" fieldname="idattachedfile" />
+        </column>
+        <column name="idlogo" title="Logo Empresa" display="center" order="130">
+            <widget type="text" fieldname="idlogo" />
+        </column>
+        <column name="idplantilla" title="Id" display="none" order="140">
+            <widget type="text" fieldname="idplantilla" />
+        </column>
+    </columns>
+</view>

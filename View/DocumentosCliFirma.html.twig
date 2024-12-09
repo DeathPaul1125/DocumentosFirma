@@ -1,0 +1,194 @@
+{% extends "Master/MicroTemplate.html.twig" %}
+
+{% block body %}
+    {{ parent() }}
+	<div id="wrapper">
+		<div id="content">
+			<div class="container">
+				<div class="row align-items-end mb-4">
+					<div class="col-md-8">
+						{% if fsc.empresa.idlogo %}
+							<a href="#" class="logo img-responsive">
+								{% set attached = attachedFile(fsc.empresa.idlogo) %}
+								<img src="{{ attached.url('download') }}" class="img-fluid mb-4" alt="Logo">
+							</a>
+						{% endif %}
+						<h4>{{ trans(fsc.documento.modelClassName() ~ '-min') ~ ' ' ~ fsc.documento.codigo }}</h4>
+					</div>
+					<div class="col-md-4">
+						<form method="post">
+							{% if fsc.firma.firmado == true %}
+								<button type="submit" name="Firmado" value="pdf" class="btn btn-outline-success" disabled>
+									<i class="fas fa-signature fa-fw"></i> &nbsp; Firmado
+								</button>
+							{% else %}
+								<button type="button" class="btn btn-success" data-target="#identityConfirmationModal" data-toggle="modal" id="accept_action" value="TRUE">
+									<i class="fas fa-file-signature" aria-hidden="true"></i> &nbsp; Firmar</button>
+							{% endif %}
+							<button type="submit" name="action" value="pdf" class="btn btn-outline-secondary pull-right action-button mright5">
+								<i class="fas fa-cloud-download-alt fa-fw"></i> &nbsp; Descargar
+							</button>
+						</form>
+					</div>
+					{# <div class="col-md-8">
+							<form method="post">
+								<button type="button" onclick="CopiarEnlace('{{ fsc.firma.publicLink() }}')" name="action" class="btn btn-outline-info btn-block pull-right action-button">
+									<i class="fas fa-link"></i> &nbsp; Copiar Link
+								</button>
+							</form>
+						</div> #}
+				</div>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="panel_s mtop20">
+							<div class="panel-body tc-content padding-30 contract-html-content">
+								<div class="row">
+									<iframe src="{{ fsc.pdffile }}" frameborder="0" width="100%" height="1200"></iframe>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 contract-right">
+						<div class="card" style="width: 18rem;">
+							{% if fsc.empresa.idlogo %}
+								<a href="#" class="logo img-responsive">
+									{% set attached = attachedFile(fsc.empresa.idlogo) %}
+									<img src="{{ attached.url('download') }}" class="card-img-top mb-2 mt-2" alt="Logo">
+								</a>
+							{% endif %}
+							<div class="card-body">
+								<h5 class="card-title">Resumen</h5>
+								<div class="row mtop20">
+									<div class="col-md-12 contract-value">
+										<h5 class="bold mbot30">
+											Importe del contrato:<br/>{{ fsc.alta.precio }} €
+										</h5>
+									</div>
+									<div class="col-md-12 text-muted contract-number">
+										# Contrato número<br/>
+									</div>
+									<div class="col-md-12 contract-number">
+										10141 /{{ fsc.alta.idalta }}
+									</div>
+									<div class="col-md-12 text-muted contract-start-date">
+										Fecha de inicio<br/>
+									</div>
+									<div class="col-md-12 contract-start-date">
+										{{ fsc.alta.creationdate }}
+									</div>
+									<div class="col-md-12 text-muted contract-type">
+										Tipo de contrato<br/>
+									</div>
+									<div class="col-md-12 contract-type">
+										{{ fsc.alta.tipocontrato.name}}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal fade" tabindex="-1" role="dialog" id="identityConfirmationModal">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header bg-info">
+							<h4 class="modal-title text-white">Confirmar Identidad</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true" class="text-white">&times;</span>
+							</button>
+						</div>
+						<form action="" class="form-horizontal" method="post" accept-charset="utf-8">
+							<input type="hidden" name="multireqtoken" value="{{ fsc.multiRequestProtection.newToken() }}"/>
+							<input type="hidden" name="signature_data" id="signature-data" />
+							<input type="hidden" name="action" value="documento_firmado"/>
+							<div class="modal-body">
+								<div id="identity_fields">
+									<div class="form-group">
+										<label for="nombrefirma" class="control-label col-sm-12">
+												<span class="text-left inline-block full-width">
+													Nombre y Apellidos
+												</span>
+										</label>
+										<div class="col-sm-12">
+											<input type="text" name="nombrefirma" id="nombrefirma" class="form-control" required="true" value="">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="niffirma" class="control-label col-sm-12">
+												<span class="text-left inline-block full-width">
+													DNI Titular
+												</span>
+										</label>
+										<div class="col-sm-12">
+											<input type="text" name="niffirma" id="niffirma" class="form-control" required="true" maxlength="15" value="">
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-12">
+											<p class="bold" id="signatureLabel">Firma</p>
+											<div class="signature-pad--body">
+												<canvas height="140" width="430" style="border: 1px solid silver;"></canvas>
+											</div>
+											<input type="text" style="width:1px; height:1px; border:0;" tabindex="-1" name="signature" id="signatureInput">
+											<div class="dispay-block">
+												<button type="button" class="btn btn-block btn-warning" onclick="signaturePad.clear();">Limpiar</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer">
+								<p class="text-left text-muted e-sign-legal-text">
+									He leido y acepto las condiciones. Al hacer click en  "Firmar", soy conocedor y acepto las condiciones del contrato.
+								</p>
+								<hr/>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+								<button type="submit" onclick="guardar();" data-loading-text="Por favor espere…" autocomplete="off" data-form="#identityConfirmationForm" class="btn btn-success">Firma</button>
+							</div>
+						</form>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+		</div>
+	</div>
+
+<script type="text/javascript" id="sticky-js" src="{{asset('Plugins/DocumentosFirma/node_modules/sticky-js/dist/sticky.min.js')}}"></script>
+<script type="text/javascript" id="signature-pad" src="{{asset('Plugins/DocumentosFirma/node_modules/signature_pad/dist/signature_pad.umd.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('Plugins/DocumentosFirma/Assets/JS/CopiarEnlace.js')}}"></script>
+<script>
+	$(function () {
+	new Sticky('[data-sticky]');
+	$(".contract-right table").wrap("<div class='table-responsive'></div>");
+	// Create lightbox for contract content images
+	$('.contract-html-content img').wrap(function () {
+	return '<a href="' + $(this).attr('src') + '" data-lightbox="contract"></a>';
+	});
+	})
+</script>
+<script type="text/javascript">
+	const canvas = document.querySelector("canvas");
+	const signaturePad = new SignaturePad(canvas);
+
+	function guardar() {
+		if (signaturePad.isEmpty() === false) {
+			const signatureInput = document.getElementById('signature-data');
+			signatureInput.value = signaturePad.toDataURL('image/png');
+		}
+	}
+</script>
+
+
+{% endblock %}
+
+{% block css %}
+    {{ parent() }}
+    	<link rel="shortcut icon" id="favicon" href="{{ asset('Dinamic/Assets/Images/favicon.ico') }}">
+		<link rel="apple-touch-icon”" id="favicon-apple-touch-icon" href="{{ asset('Dinamic/Assets/Images/apple-icon-180x180.png') }}">
+		<link rel="stylesheet" type="text/css" id="bootstrap-css" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}">
+		<link rel="stylesheet" type="text/css" id="fontawesome-css" href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}">
+		<script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
+		<script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+{% endblock %}

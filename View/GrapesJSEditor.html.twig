@@ -1,0 +1,40 @@
+{% extends 'Master/MicroTemplate.html.twig' %}
+
+{% block body %}
+  {{ parent() }}
+
+  <div id="gjs">
+    <h1>Hello World Component!</h1>
+  </div>
+  {# <div id="blocks">Esto es un block pero aun no hace nada</div> #}
+  <script>
+    const editor = grapesjs.init({
+      // Indicate where to init the editor. You can also pass an HTMLElement
+      container: '#gjs',
+      // Get the content for the canvas directly from the element
+      // As an alternative we could use: `components: '<h1>Hello World Component!</h1>'`,
+      fromElement: true,
+      // Size of the editor
+      height: '300px',
+      width: 'auto',
+      // Disable the storage manager for the moment
+      storageManager: false,
+      // Avoid any default panel
+      panels: { defaults: [] }
+    })
+  </script>
+{% endblock %}
+
+{% block css %}
+  {{ parent() }}
+  {# <link rel="stylesheet" href="{{ asset('Plugins/DocumentosFirma/node_modules/grapesjs/dist/css/grapes.min.css') }}" />
+  <link rel="stylesheet" href="{{ asset('Dinamic/Assets/CSS/GrapesJSEditor.css') }}" /> #}
+  <link rel="stylesheet" href="//unpkg.com/grapesjs/dist/css/grapes.min.css" />
+{% endblock %}
+
+{% block javascripts %}
+  {{ parent() }}
+  {# <script src="{{ asset('Plugins/DocumentosFirma/node_modules/grapesjs/dist/grapes.min.js') }}"></script>
+  <script src="{{ asset('Dinamic/Assets/JS/GrapesJSEditor.js') }}"></script> #}
+  <script src="//unpkg.com/grapesjs"></script>
+{% endblock %}

@@ -1,0 +1,94 @@
+<div class="row mr-5 ml-5">
+  <div class="col-md-12 lg-12">
+    <div class="card mt-4 mb-4 align-items-center" style="width: 90rem;">
+      <div class="card-body">
+        <h5 class="card-title">Resumen</h5>
+        {% if fsc.getModel().modelClassName() == 'AlbaranCliente' %}
+          <div class="row mtop20">
+            <div class="col-md-12 text-muted">
+              <span># Albarán Nº : {{ fsc.getModel().numero }}</span> | <span class="align-rigth"># Cliente : {{ fsc.getModel().nombrecliente }}</span>
+            </div>
+            <div class="col-md-12 contract-value">
+              <h5 class="bold mbot30 text-muted">Importe : {{ fsc.getModel().totaleuros }} € | Fecha de Entrega : {{ fsc.getModel().fecha }}</h5>
+            </div>
+          </div>
+        {% elseif fsc.getModel().modelClassName() == 'FacturaCliente' %}
+          <div class="row mtop20">
+            <div class="col-md-12 text-muted">
+              <span># Albarán Nº : {{ fsc.getModel().numero }}</span> | <span class="align-rigth"># Cliente : {{ fsc.getModel().nombrecliente }}</span>
+            </div>
+            <div class="col-md-12 contract-value">
+              <h5 class="bold mbot30 text-muted">Importe : {{ fsc.getModel().totaleuros }} € | Fecha de Entrega : {{ fsc.getModel().fecha }}</h5>
+            </div>
+          </div>
+        {% elseif fsc.getModel().modelClassName() == 'PedidoCliente' %}
+          <div class="row mtop20">
+            <div class="col-md-12 text-muted">
+              <span># Albarán Nº : {{ fsc.getModel().numero }}</span> | <span class="align-rigth"># Cliente : {{ fsc.getModel().nombrecliente }}</span>
+            </div>
+            <div class="col-md-12 contract-value">
+              <h5 class="bold mbot30 text-muted">Importe : {{ fsc.getModel().totaleuros }} € | Fecha de Entrega : {{ fsc.getModel().fecha }}</h5>
+            </div>
+          </div>
+        {% elseif fsc.getModel().modelClassName() == 'PresupuestoCliente' %}
+          <div class="row mtop20">
+            <div class="col-md-12 text-muted">
+              <span># Albarán Nº : {{ fsc.getModel().numero }}</span> | <span class="align-rigth"># Cliente : {{ fsc.getModel().nombrecliente }}</span>
+            </div>
+            <div class="col-md-12 contract-value">
+              <h5 class="bold mbot30 text-muted">Importe : {{ fsc.getModel().totaleuros }} € | Fecha de Entrega : {{ fsc.getModel().fecha }}</h5>
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+    <div class="card mt-4 mb-4 align-items-center" style="width: 90rem;">
+      <div class="panel-body mt-4 mb-4">
+        <h5 class="ml-3">Firma dentro del recuadro</h5>
+        <div class="row mt-4 mb-4">
+          <div class="col-md-12">
+            <form action="DocumentosCliFirma" class="form-horizontal" method="post" accept-charset="utf-8">
+                {{ formToken() }}
+                {% if fsc.getModel().modelClassName() == 'AlbaranCliente' %}
+                  <input type="hidden" name="idalbaran" value="{{ fsc.getModel().idalbaran }}">
+                {% elseif fsc.getModel().modelClassName() == 'FacturaCliente' %}
+                  <input type="hidden" name="idfactura" value="{{ fsc.getModel().idfactura }}">
+                {% elseif fsc.getModel().modelClassName() == 'PedidoCliente' %}
+                  <input type="hidden" name="idpedido" value="{{ fsc.getModel().idpedido }}">
+                {% elseif fsc.getModel().modelClassName() == 'PresupuestoCliente' %}
+                  <input type="hidden" name="idpresupuesto" value="{{ fsc.getModel().idpresupuesto }}">
+                {% endif %}
+                <input type="hidden" name="activetab" value="{{ currentView.getViewName() }}">
+              <input type="hidden" name="signature_data" id="signature-data" />
+              <input type="hidden" name="action" value="documento_firmado" />
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <div class="signature-pad--body">
+                    <canvas height="240" width="1200" style="border: 1px solid silver;"></canvas>
+                  </div>
+                  <input type="text" style="width:1px; height:1px; border:0px;" tabindex="-1" name="signature" id="signatureInput" />
+                  <div class="dispay-block">
+                    <button type="button" class="btn btn-warning" onclick="signaturePad.clear();">Limpiar</button>
+                    <button type="submit" onclick="guardar();" data-loading-text="Por favor espere…" autocomplete="off" data-form="#identityConfirmationForm" class="btn btn-success">Firma</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="{{ asset('Plugins/DocumentosFirma/node_modules/signature_pad/dist/signature_pad.umd.min.js') }}"></script>
+<script>
+  var canvas = document.querySelector('canvas')
+  var signaturePad = new SignaturePad(canvas)
+  function guardar() {
+    if (signaturePad.isEmpty() === false) {
+      var signatureInput = document.getElementById('signature-data')
+      signatureInput.value = signaturePad.toDataURL('image/png')
+    }
+  }
+</script>

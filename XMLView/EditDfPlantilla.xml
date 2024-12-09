@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+    <columns>
+        <group name="data" numcolumns="12" valign="bottom">
+            <column name="creationdate" title="Fecha Creación" numcolumns="2" order="100">
+                <widget type="date" fieldname="creationdate" />
+            </column>
+            <column name="titulo" title="Título" numcolumns="4" order="110" >
+                <widget type="text" fieldname="titulo" />
+            </column>
+            <column name="idattachedfile" title="Firma Empresa" numcolumns="2" order="120">
+                <widget type="library" fieldname="idattachedfile"/>
+            </column>
+            <column name="idlogo" title="Logo" display="center" numcolumns="2" order="130">
+                <widget type="library" fieldname="idlogo"/>
+            </column>
+            <column name="rgpd" title="RGPD" display="center" order="135">
+                <widget type="checkbox" fieldname="rgpd"/>
+            </column>
+            <column name="html" title="Redactar Plantilla" order="140" description="Para mostrar la firma de la empresa debes incluir {firma-empresa} y para mostrar la firma del usuario {firma-usuario}. Si quieres mostrar datos de la persona o empresa a quien va dirigido el documento puedes hacerlo usando los siguentes campos. Estos se sustituiran por los datos del cliente, contacto o proveedor relacionado con el documento. Datos Disponibles del Cliente:  {cliente-nombre} {cliente-razon-social} {cliente-cifnif} {cliente-direccion}. Datos Disponibles del Contacto : {contacto-nombre} {contacto-apellidos} {contacto-email} {contacto-telefono}. Datos disponibles del proveedor: {proveedor-nombre} {proveedor-razon-social} {proveedor-cifnif} {proveedor-direccion}. Datos Disponibles de la Factura: {factura-numero} {factura-fecha} {factura-total} " numcolumns="12">
+                <widget type="html" fieldname="html" />
+            </column>
+            <column name="idplantilla" display="none" order="140">
+                <widget type="text" fieldname="idplantilla" />
+            </column>
+        </group>
+    </columns>
+</view>

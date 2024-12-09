@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+    <columns>
+        <group name="data" numcolumns="12">
+            <column name="rgpd" display="center" order="150" numcolumns="12">
+                <widget type="checkbox" fieldname="rgpd"/>
+            </column>
+        </group>
+    </columns>
+</view>

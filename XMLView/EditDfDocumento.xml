@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+    <columns>
+        <group name="data" numcolumns="12" valign="bottom">
+            <column name="iddocumento" order="90" display="none">
+                <widget type="text" fieldname="iddocumento" />
+            </column>
+            <column name="idplantilla" title="Plantilla" order="100" numcolumns="3">
+                <widget type="select" fieldname="idplantilla" onclick="EditDfPlantilla">
+                    <values source="df_plantillas" fieldcode="idplantilla" fieldtitle="titulo" />
+                </widget>
+            </column>
+            <column name="codcliente" title="Cliente" order="105" numcolumns="3">
+                <widget type="autocomplete" fieldname="codcliente" onclick="EditCliente">
+                    <values source="clientes" fieldcode="codcliente" fieldtitle="nombre" />
+                </widget>
+            </column>
+            <column name="codlote" title="Codigo de lote" order="120" numcolumns="3">
+                <widget type="autocomplete" fieldname="codlote">
+                    <values source="lotes" fieldcode="codlote" fieldtitle="codlote" />
+                </widget>
+            </column>
+            <column name="fechaini" title="Inicio" order="150" numcolumns="3" display="none">
+                <widget type="date" fieldname="fechaini" />
+            </column>
+            <column name="fechafin" title="Expiración" order="155" numcolumns="3" display="none">
+                <widget type="date" fieldname="fechafin" />
+            </column>
+            <column name="renovar" title="Renueva" display="none" order="160" >
+                <widget type="checkbox" fieldname="renovar" />
+            </column>
+            <column name="firmado" title="Firmado" display="none" order="165">
+                <widget type="checkbox" fieldname="firmado" />
+            </column>
+        </group>
+        <group name="sign-data" numcolumns="12" valign="bottom">
+            <column name="fechafirma" title="Fecha Firma" order="170" numcolumns="4" display="none">
+                <widget type="date" fieldname="fechafirma" readonly="true" />
+            </column>
+            <column name="ip" title="IP" order="180" numcolumns="4" display="none">
+                <widget type="text" fieldname="ip" readonly="true" />
+            </column>
+            <column name="useragent" title="Navegador" order="190" numcolumns="4" display="none">
+                <widget type="text" fieldname="useragent" readonly="true" />
+            </column>
+        </group>
+    </columns>
+</view>

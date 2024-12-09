@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<table>
+    <column>
+        <name>creationdate</name>
+        <type>date</type>
+    </column>
+    <column>
+        <name>html</name>
+        <type>LONGTEXT</type>
+    </column>
+    <column>
+        <name>idattachedfile</name>
+        <type>integer</type>
+    </column>
+    <column>
+        <name>idlogo</name>
+        <type>integer</type>
+    </column>
+    <column>
+        <name>idplantilla</name>
+        <type>serial</type>
+    </column>
+    <column>
+        <name>rgpd</name>
+        <type>boolean</type>
+    </column>
+    <column>
+        <name>titulo</name>
+        <type>character varying(100)</type>
+    </column>
+    <constraint>
+        <name>df_plantillas_pkey</name>
+        <type>PRIMARY KEY (idplantilla)</type>
+    </constraint>
+</table>
