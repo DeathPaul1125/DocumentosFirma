@@ -20,6 +20,7 @@ use FacturaScripts\Dinamic\Model\AlbaranCliente;
 use FacturaScripts\Dinamic\Model\Colonia;
 use FacturaScripts\Dinamic\Model\Lote;
 use FacturaScripts\Dinamic\Model\PedidoCliente;
+use FacturaScripts\Plugins\Sacramento\Model\CalculoInteres;
 
 class DfDocumento extends ModelClass
 {
@@ -81,6 +82,13 @@ class DfDocumento extends ModelClass
         $colonia = new Colonia();
         $colonia->loadFromCode($this->getLote()->colonia);
         return $colonia;
+    }    
+    
+    public function getCalculoInteres()
+    {
+        $calculointeres = new CalculoInteres();
+        $calculointeres->loadFromCode('',[new DataBaseWhere('codlote', $this->getLote()->colonia)]);
+        return $calculointeres;
     }
 
     
@@ -170,6 +178,7 @@ class DfDocumento extends ModelClass
         $pedido = $this->getPedido();
         $lote = $this->getLote();
         $colonia = $this->getColonia();
+        $calculointeres = $this->getCalculoInteres();
 
         // Reemplazamos las variables de la plantilla
         $sustituciones = [
@@ -212,22 +221,31 @@ class DfDocumento extends ModelClass
 
 
             '{finca}' => $lote->finca,
+            '{finca-letras}' => $lote->fincaletras,
             '{sector}' => $lote->sector,
+            '{sector-letras}' => $lote->sectorletras,
             '{manzana}' => $lote->manzana,
+            '{manzana-letras}' => $lote->manzanaletras,
             '{lote}' => $lote->lote,
+            '{lote-letras}' => $lote->loteletras,
             '{direccion}' => $lote->direccion,
             '{folio}' => $lote->folio,
+            '{folio-letras}' => $lote->folioletras,
             '{libro}' => $lote->libro,
+            '{libro-letras}' => $lote->libroletras,
             //medidas
             '{frente}' => $lote->frente,
             '{fondo}' => $lote->fondo,
+            '{total-metrosletras}' => $lote->totalmetrosletras,
             '{total-metros}' => $lote->totalmetros,
+
 
 
 
             //colonia
             '{colonia}' => $colonia->nombre,
             '{representante}' => $colonia->representante,
+            '{representante-departamento}' => $colonia->departamento,
             '{representante-edad-letras}' => $colonia->edadletras,
             '{representante-edad-letras}' => $colonia->edadletras,
             '{representante-profesion}' => $colonia->profesion,
@@ -235,6 +253,11 @@ class DfDocumento extends ModelClass
             '{representante-cui}' => $colonia->cuirepresentante,
             '{representante-cui-letras}' => $colonia->cuiletras,
 
+            //calculo de intereses
+            '{calculo-cuotas}'    => $calculointeres->cuotas,
+            '{calculo-cuotas-le}' => $calculointeres->cuotasletras,
+            '{calculo-costolote}' => $calculointeres->costolote,
+            '{calculo-costolote-le}' => $calculointeres->costoloteletras,
         ];
         $html = str_replace(array_keys($sustituciones), array_values($sustituciones), $html);
 
