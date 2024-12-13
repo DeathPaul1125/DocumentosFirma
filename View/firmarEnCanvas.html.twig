@@ -6,37 +6,37 @@
         {% if fsc.getModel().modelClassName() == 'AlbaranCliente' %}
           <div class="row mtop20">
             <div class="col-md-12 text-muted">
-              <span># Albarán Nº : {{ fsc.getModel().numero }}</span> | <span class="align-rigth"># Cliente : {{ fsc.getModel().nombrecliente }}</span>
+              <span># Albarán Nº : {{ fsc.getModel().numero }}</span><span class="align-rigth"># Cliente : {{ fsc.getModel().nombrecliente }}</span>
             </div>
             <div class="col-md-12 contract-value">
-              <h5 class="bold mbot30 text-muted">Importe : {{ fsc.getModel().totaleuros }} € | Fecha de Entrega : {{ fsc.getModel().fecha }}</h5>
+              <h5 class="bold mbot30 text-muted">Importe : {{ fsc.getModel().totaleuros }} €Fecha de Entrega : {{ fsc.getModel().fecha }}</h5>
             </div>
           </div>
         {% elseif fsc.getModel().modelClassName() == 'FacturaCliente' %}
           <div class="row mtop20">
             <div class="col-md-12 text-muted">
-              <span># Albarán Nº : {{ fsc.getModel().numero }}</span> | <span class="align-rigth"># Cliente : {{ fsc.getModel().nombrecliente }}</span>
+              <span># Albarán Nº : {{ fsc.getModel().numero }}</span><span class="align-rigth"># Cliente : {{ fsc.getModel().nombrecliente }}</span>
             </div>
             <div class="col-md-12 contract-value">
-              <h5 class="bold mbot30 text-muted">Importe : {{ fsc.getModel().totaleuros }} € | Fecha de Entrega : {{ fsc.getModel().fecha }}</h5>
+              <h5 class="bold mbot30 text-muted">Importe : {{ fsc.getModel().totaleuros }} €Fecha de Entrega : {{ fsc.getModel().fecha }}</h5>
             </div>
           </div>
         {% elseif fsc.getModel().modelClassName() == 'PedidoCliente' %}
           <div class="row mtop20">
             <div class="col-md-12 text-muted">
-              <span># Albarán Nº : {{ fsc.getModel().numero }}</span> | <span class="align-rigth"># Cliente : {{ fsc.getModel().nombrecliente }}</span>
+              <span># Albarán Nº : {{ fsc.getModel().numero }}</span><span class="align-rigth"># Cliente : {{ fsc.getModel().nombrecliente }}</span>
             </div>
             <div class="col-md-12 contract-value">
-              <h5 class="bold mbot30 text-muted">Importe : {{ fsc.getModel().totaleuros }} € | Fecha de Entrega : {{ fsc.getModel().fecha }}</h5>
+              <h5 class="bold mbot30 text-muted">Importe : {{ fsc.getModel().totaleuros }} €Fecha de Entrega : {{ fsc.getModel().fecha }}</h5>
             </div>
           </div>
         {% elseif fsc.getModel().modelClassName() == 'PresupuestoCliente' %}
           <div class="row mtop20">
             <div class="col-md-12 text-muted">
-              <span># Albarán Nº : {{ fsc.getModel().numero }}</span> | <span class="align-rigth"># Cliente : {{ fsc.getModel().nombrecliente }}</span>
+              <span># Albarán Nº : {{ fsc.getModel().numero }}</span><span class="align-rigth"># Cliente : {{ fsc.getModel().nombrecliente }}</span>
             </div>
             <div class="col-md-12 contract-value">
-              <h5 class="bold mbot30 text-muted">Importe : {{ fsc.getModel().totaleuros }} € | Fecha de Entrega : {{ fsc.getModel().fecha }}</h5>
+              <h5 class="bold mbot30 text-muted">Importe : {{ fsc.getModel().totaleuros }} €Fecha de Entrega : {{ fsc.getModel().fecha }}</h5>
             </div>
           </div>
         {% endif %}
