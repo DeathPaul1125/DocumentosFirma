@@ -1,2 +1,2 @@
 # DocumentoFirma
-Plugin para los contratos de Sacramento
+Plugin para FacturaScripts que habilita la firma de documentos digitales

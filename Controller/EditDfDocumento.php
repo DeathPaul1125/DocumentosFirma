@@ -20,7 +20,7 @@ class EditDfDocumento extends \FacturaScripts\Core\Lib\ExtendedController\EditCo
         parent::loadData($viewName, $view);
         if ($viewName === "EditDfDocumento") {
             $id = $this->getViewModelValue($viewName, "id");
-            $view->loadData($id);
+             $view->loadData($id);
         }
 
         // Añadir botón de firma
