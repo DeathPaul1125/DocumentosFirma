@@ -210,6 +210,7 @@ class DfDocumento extends ModelClass
             '{cliente-cui}' => $cliente->cui,
             '{cliente-cui-letras}' => $cliente->letrascui,
             '{cliente-edad}' => $cliente->edad, 
+            '{cliente-edadletras}' => $cliente->edadletras, 
             '{cliente-estadocivil}' => $cliente->estadocivil, 
             '{cliente-profesion}' => $cliente->profesion,
             '{cliente-nacionalidad}' => $cliente->nacionalidad,
@@ -258,6 +259,13 @@ class DfDocumento extends ModelClass
             '{calculo-cuotas-le}' => $calculointeres->cuotasletras,
             '{calculo-costolote}' => $calculointeres->costolote,
             '{calculo-costolote-le}' => $calculointeres->costoloteletras,
+            '{calculo-enganche}' => $calculointeres->enganche,
+            '{calculo-enganche-le}' => $calculointeres->engancheletras,
+            '{calculo-saldo}' => $calculointeres->saldoconint,
+            '{calculo-saldo-le}' => $calculointeres->saldoconintletras,
+            '{calculo-cuota}' => $calculointeres->cuota,
+            '{calculo-cuota-le}' => $calculointeres->cuotaletras,
+
         ];
         $html = str_replace(array_keys($sustituciones), array_values($sustituciones), $html);
 
