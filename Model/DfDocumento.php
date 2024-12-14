@@ -268,6 +268,10 @@ class DfDocumento extends ModelClass
             '{calculo-cuota}' => $calculointeres->cuota,
             '{calculo-cuota-le}' => $calculointeres->cuotaletras,
 
+            //fecha de contratos
+            '{fecha-inicio}' => $this->fechaini,
+            '{fecha-fin}' => $this->fechafin,
+
         ];
         $html = str_replace(array_keys($sustituciones), array_values($sustituciones), $html);
 
