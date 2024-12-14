@@ -253,6 +253,8 @@ class DfDocumento extends ModelClass
             '{representante-estado-civil}' => $colonia->estadocivil,
             '{representante-cui}' => $colonia->cuirepresentante,
             '{representante-cui-letras}' => $colonia->cuiletras,
+            '{municipio-colonia}' => $colonia->municipiocolonia,
+            '{departamento-colonia}' => $colonia->departamentocolonia,
 
             //calculo de intereses
             '{calculo-cuotas}'    => $calculointeres->cuotas,
